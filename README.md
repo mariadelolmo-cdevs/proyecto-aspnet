@@ -6,6 +6,14 @@ Brought to you by: La Grajilla 🐦‍⬛
 
 Los comandos se escriben en la terminal de VS Code (menú Terminal → New Terminal). Es PowerShell. Se ejecutan uno a uno, en orden.
 
+### Requisitos
+
+Antes de empezar, hay que tener instalado:
+
+- **.NET SDK 10**: se descarga desde [dotnet.microsoft.com](https://dotnet.microsoft.com/download). Para comprobarlo: `dotnet --version`.
+- **Git**: se descarga desde [git-scm.com](https://git-scm.com). Para comprobarlo: `git --version`.
+- **VS Code**, con las extensiones de abajo.
+
 ### Extensiones de VS Code
 
 Instala estas dos extensiones desde el panel de extensiones (Ctrl + Shift + X):
@@ -32,6 +40,8 @@ Crea la carpeta `C:\dev\proyecto` con una web MVC lista para usar. `-n proyecto`
 Este comando se ejecuta desde `C:\dev`, no desde dentro de `proyecto`. Si se ejecuta dentro, se crea una carpeta `proyecto\proyecto` por duplicado.
 
 Trae de serie `Controllers`, `Models`, `Views`, `wwwroot` (con Bootstrap), `Program.cs` y `appsettings.json`.
+
+**¡IMPORTANTE!** Los pasos usan `proyecto`. Si le pones otro nombre al proyecto, cambia `proyecto` por el tuyo en los comandos de los pasos 2 y 3, y en los `namespace` y los `using` de los pasos 9, 10 y 11.
 
 ### 3. Entrar en la carpeta
 
@@ -208,7 +218,27 @@ Hace que `DbInitializer` se ejecute cada vez que arranca la app.
 
 ### 12. .gitignore
 
-Añade un archivo `.gitignore` en la raíz del proyecto para que no se suban a git las carpetas `bin` y `obj` ni los archivos de base de datos (el `.db`).
+Hay dos formas de crearlo.
+
+**1) Con la terminal** (dentro de la carpeta `proyecto`)
+
+```powershell
+dotnet new gitignore
+```
+
+Crea el `.gitignore` estándar de .NET, que ya ignora `bin` y `obj`. Al final del archivo, añade estas líneas para que no se suban las bases de datos:
+
+```gitignore
+# SQLite database files
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+```
+
+**2) A mano**
+
+Crea un archivo `.gitignore` en la raíz del proyecto que ignore, como mínimo, `bin/`, `obj/` y `*.db`.
 
 ### 13. Comprobar la base de datos
 
